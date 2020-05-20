@@ -24,8 +24,8 @@ if __name__ == "__main__":
     print("There are %d trees and %d halos."%(Ntrees,totNhalos))
     TreeNhalos=unpack("i"*Ntrees, fileContent[8:4*Ntrees+8])
     print(TreeNhalos[0])
-    structSize=96 #6*4+12*4+8+3*4+4
-    structFormat="iiiiiiffffffffffffqiiif"
+    structSize=104 #6*4+14*4+8+3*4+4
+    structFormat="iiiiiiffffffffffffffqiiif"
     TreeIndex=0
     offset=4*Ntrees+8
     start=0
@@ -39,4 +39,6 @@ if __name__ == "__main__":
     print(L)
     #Tree=unpack(structFormat*TreeNhalos[TreeIndex], fileContent[4*Ntrees:structSi*TreeNhalos[TreeIndex]])
     Tree=unpack(structFormat*TreeNhalos[TreeIndex], fileContent[Position:structSize*TreeNhalos[TreeIndex]+Position])
+    print(np.array(Tree).shape)
+    print(Tree[21])
     MergerTreeFile.close()
