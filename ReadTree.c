@@ -396,7 +396,7 @@ int main()
 int filenr,tree, FirstFile=0,LastFile=0;
 //char bufz0[1000];
 sprintf(SimulationDir_s,"/media/shahram/SD/Sample100Mpc/717");
-LastSnapShotNr=100;
+LastSnapShotNr=264;
 //FILE *fd;
 for(filenr = FirstFile; filenr <= LastFile; filenr++)
   {
