@@ -26,6 +26,8 @@ if __name__ == "__main__":
     print(TreeNhalos[0])
     structSize=104 #6*4+14*4+8+3*4+4
     structFormat="iiiiiiffffffffffffffqiiif"
+    step=len(structFormat)
+    print("step:%d"%step)
     TreeIndex=0
     offset=4*Ntrees+8
     start=0
@@ -41,4 +43,31 @@ if __name__ == "__main__":
     Tree=unpack(structFormat*TreeNhalos[TreeIndex], fileContent[Position:structSize*TreeNhalos[TreeIndex]+Position])
     print(np.array(Tree).shape)
     print(Tree[21])
+    k=0
+    Descendant=[0]*TreeNhalos[TreeIndex]
+    FirstProgenitor=[0]*TreeNhalos[TreeIndex]
+    NextProgenitor=[0]*TreeNhalos[TreeIndex]
+    FirstHaloInFOFgroup=[0]*TreeNhalos[TreeIndex]
+    NextHaloInFOFgroup=[0]*TreeNhalos[TreeIndex]
+    Len=[0]*TreeNhalos[TreeIndex]
+    Mvir=[0.0]*TreeNhalos[TreeIndex]
+    SnapNum=[0]*TreeNhalos[TreeIndex]
+    SubhaloIndex=[0]*TreeNhalos[TreeIndex]
+    SubHalofMass=[0.0]*TreeNhalos[TreeIndex]
+    #
+    for i in range(0,len(Tree),step):
+        Descendant[k]=Tree[i]
+        FirstProgenitor[k]=Tree[i+1]
+        NextProgenitor[k]=Tree[i+2]
+        FirstHaloInFOFgroup[k]=Tree[i+3]
+        NextHaloInFOFgroup[k]=Tree[i+4]
+        Len[k]=Tree[i+5]
+        Mvir[k]=Tree[i+7]*1.0e10
+        SnapNum[k]=Tree[i+21]
+        SubhaloIndex[k]=Tree[i+23]
+        SubHalofMass[k]=Tree[i+24]
+        k+=1
+    #print((Mvir[0:100]))
+    #print(SnapNum[0:100])
     MergerTreeFile.close()
+    ############################
