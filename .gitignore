@@ -1,4 +1,6 @@
 ReadTree
+*.ascii
+*.bin
 # Prerequisites
 *.d
 

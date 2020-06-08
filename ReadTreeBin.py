@@ -111,6 +111,7 @@ if __name__ == "__main__":
     LL=Smax-Smin
     Snap=[0]*LL
     HID=[0]*LL
+    SubID=[0]*LL
     j=0
     snaprange=np.arange(Smax-1,Smin+1,-1)
     print(snaprange)
@@ -133,15 +134,19 @@ if __name__ == "__main__":
         print(M.size)
         SubH=SubHalo[Desc==index]
         FFOF=FirstFOF[Desc==index]
-        if M.size!=0:
+        if M.size:
             h=np.argmax(np.array(M))#we pick the most massive halo
             #mh=np.max(M)
             index=FFOF[h]
+            subindex=SubH[h]
         else:
             index=-1
+            subindex=-1
         Snap[j]=s
         HID[j]=index
+        SubID[j]=subindex
         j+=1
         #print(h)
+    print(SubID)
     print(Snap)
     print(HID)
